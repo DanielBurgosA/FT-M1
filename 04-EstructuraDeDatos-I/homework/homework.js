@@ -15,9 +15,34 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
+  if(n===1){
+    return 1;
+  }
+  return n*nFactorial(n-1) //3*2*
 }
 
+function nFact(n) {
+  var resp = 1
+  for(let i=1; i<n+1; i++){
+    resp = resp*i
+  }
+  return resp;
+}
+
+
+
 function nFibonacci(n) {
+  if(n===0) return 0;
+  else if(n===1) return 1;
+  else return nFibonacci(n-1)+nFibonacci(n-2);  
+}
+
+function fib(n){
+  let arr = [0, 1, 1];
+  for (let i = 2; i < n ; i++){
+    arr.push(arr[i - 2] + arr[i -1])
+  }
+ return arr[n]
 }
 
 /*
@@ -30,9 +55,22 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
-
+  this.array=[];
 }
 
+Queue.prototype.enqueue = function(arg){
+  this.array.unshift(arg);
+}
+
+
+Queue.prototype.dequeue = function(){
+  if (this.array.length===0) return undefined;
+  return this.array.pop();
+}
+
+Queue.prototype.size = function(){
+  return this.array.length;
+}
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 

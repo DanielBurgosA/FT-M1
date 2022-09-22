@@ -14,23 +14,23 @@ var b = 10;
 
 var c = function(a, b, c) {
   var x = 10;
-  console.log(x); //10
-  console.log(a); //a
+  console.log(x); //10     //10  
+  console.log(a); //a   /a
 
   var f = function(a, b, c) {
     b = a;    
-    console.log(b); //a
+    console.log(b); //a    //a
     b = c;   
-    var x = 5;
+    var x = 5;    
   }
 
   f(a,b,c);
-  console.log(b); // c
+  console.log(b); // b        //b
 }
 
-c(8,9,10);  // 10 - 8 - 8 - 9
-console.log(b); //10
-console.log(x); //1
+c(8,9,10);  // 10 - 8 - 8 - 9       //10 8 8 9
+console.log(b); //10                //10
+console.log(x); //1                 //1
 ```
 
 ```javascript
@@ -59,7 +59,7 @@ console.log(instructor); // tony
       console.log(instructor); // franco
    }
 })();
-console.log(instructor); //tony
+console.log(instructor); //tony - el entorno de la funcion se destruye entonces la variable se pierde
 ```
 
 ```javascript
@@ -71,9 +71,9 @@ if (true) {
     console.log(instructor); // the flash
     console.log(pm); // Reverse Flash
 }
-console.log(instructor);  // the flash
+console.log(instructor);  // the flash - no crea nuevo entorno por lo que la variable se pisa
 console.log(pm); // Franco
-```
+``` 
 ### Coerción de Datos
 
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
@@ -92,7 +92,7 @@ parseInt("09") // 9
 2 && 5 //5
 5 || 0 // 5
 0 || 5 //0 
-[3]+[3]-[10] // + concatena    - resta
+[3]+[3]-[10] // + concatena    - resta 23
 3>2>1 // false
 [] == ![] // true
 ```
@@ -133,7 +133,7 @@ function getFood(food) {
     return snack;
 }
 
-getFood(false); //undifined 
+getFood(false); //undifined  fretorna antes de destruir el entorno
 ```
 
 
@@ -157,7 +157,7 @@ console.log(obj.prop.getFullname());
 
 var test = obj.prop.getFullname();  // undefined ¿?
 
-console.log(test()); // error test no e suna función
+console.log(test()); // error test no es una función
 ```
 
 ### Event loop

@@ -11,9 +11,71 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
 
-function LinkedList() {}
+function LinkedList() {
+  this.head = null;
+}
 
-function Node(value) {}
+function Node(value) {
+this.value = value;
+this.next = null;    
+}
+
+
+
+LinkedList.prototype.add = function(value){
+let nod = new Node (value)
+  
+if(!this.head) this.head = nod;
+
+else{
+  let curr = this.head;
+  while (curr.next){
+       curr=curr.next;
+      }
+      curr.next = nod;
+  }
+}
+
+LinkedList.prototype.remove = function (){
+if(!this.head) return null;
+
+else{
+  let current = this.head;
+  let answer = null;
+  
+  if(!current.next){
+      answer = current.value;
+      this.head = null;
+      return answer;
+  }
+
+  else{
+      while(current.next.next){
+          current=current.next;
+      }
+      answer=current.next.value;
+      current.next=null;
+      return answer;
+  }
+}
+
+}
+      
+
+LinkedList.prototype.search = function(arg){
+  let current = this.head
+
+  while (current){
+      if (typeof arg === 'function'){
+          if(arg(current.value)) return current.value;
+      }
+
+      if(arg===current.value) return arg;
+
+      current = current.next
+  }
+  return null;   
+}
 
 /*
 Implementar la clase HashTable.
@@ -30,7 +92,42 @@ La clase debe tener los siguientes métodos:
 Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
 */
 
-function HashTable() {}
+function HashTable() {
+  this.table = [];
+  this.numBuckets = 35;
+}
+
+HashTable.prototype.hash = function (key){
+  let hash = 0;
+
+  for (let i = 0; i<key.length; i++){
+    hash += key.charCodeAt(i);
+  }
+
+  return hash%this.numBuckets;
+}
+
+HashTable.prototype.set = function (key, value){
+  if (typeof key !== 'string') throw TypeError ('Keys must be strings');
+  
+  let index = this.hash(key);
+
+  if(!this.table[index]){
+    this.table[index] = {};
+  }
+
+  this.table[index][key] = value;
+}
+
+HashTable.prototype.get = function (key){
+  let index = this.hash(key);
+  return this.table [index][key];
+}
+
+HashTable.prototype.hasKey = function (key){
+  let index = this.hash(key);
+  return !!this.table [index][key]; // forzar un booleano
+}
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
